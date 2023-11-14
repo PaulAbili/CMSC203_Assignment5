@@ -1,0 +1,330 @@
+/**CMSC 203 CRN 21575
+ * Program: Assignment 5
+ * Instructor:Gregory Grinberg
+ * Summary of Description: (Give a brief description for a Program): 
+ * Due Date:11/13/2023
+ * Integrity Pledge: I pledge that I have completed the programming assignment independently.
+ * I have not copied the code from a student or any source.
+ * Student: Paul Abili
+ **/
+package application;
+import java.io.*;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class TwoDimRaggedArrayUtility {
+	public TwoDimRaggedArrayUtility() {
+
+	}
+	/**
+	 * Passes in a two-dimensional ragged array of doubles 
+	 * and returns the average of the elements in the array 
+	 * @param data a 2D array of doubles
+	 * @return the average value of the doubles 
+	 */
+	public static double getAverage(double[][] data) {
+		double total = 0;
+		double length = 0;
+		for(int i = 0; i < data.length; i++) {
+			for(int j = 0; j < data[i].length; j++) {
+				total+= data[i][j];
+				length++;
+			}
+		}
+		return total / length;
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles and a column index and returns the total of that column.
+	 * @param data a 2D array of doubles
+	 * @param col the column which should be searched
+	 * @return the total of the doubles in the column
+	 */
+	public static double getColumnTotal(double[][] data, int col) {
+		double total = 0;
+		for(int i = 0; i < data[col].length; i++) {
+			total += data[i][col];
+		}
+		return total;
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles and returns the largest element. 
+	 * @param data a 2D array of doubles
+	 * @return the highest value in the array
+	 */
+	public static double getHighestInArray(double[][] data) {
+		double highestVal = data[0][0];
+		for(int i = 0; i < data.length; i++) {
+			for(int j = 0; j < data[i].length; j++) {
+				if(highestVal < data[i][j]) {
+					highestVal = data[i][j];
+				}
+			}
+		}
+		return highestVal;
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles and a column index 
+	 * and returns the largest element in that column. 
+	 * @param data a 2D array of doubles
+	 * @param col the column which should be searched
+	 * @return the highest value in the column
+	 */
+	public static double getHighestInColumn(double[][] data, int col) {
+		double highestVal = data[0][col];
+		for(int i = 0; i < data.length; i++) {
+			if(highestVal < data[i][col] && data[i][col] != 0) {
+				highestVal = data[i][col];
+			}
+		}
+		return highestVal;	
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles and a column index 
+	 * and returns the index of the largest element in that column. 
+	 * @param data a 2D array of doubles
+	 * @param col the column which should be searched
+	 * @return the index of the highest value in the column 
+	 */
+	public static double getHighestInColumnIndex(double[][] data, int col) {
+		double highestVal = 0;
+		for(int i = 0; i < data.length; i++) {
+			if(highestVal < data[i][col] && data[i][col] != 0) {
+				highestVal = i;
+			}
+		}
+		return highestVal;	
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles and a row index 
+	 * and returns the largest element in that row. 
+	 * @param data a 2D array of doubles
+	 * @param row the row which should be searched
+	 * @return the highest value in the row
+	 */
+	public static double getHighestInRow(double[][] data, int row) {
+		double highestVal = data[row][0];	
+		for(int i = 0; i < data[row].length; i++) {
+			if(highestVal < data[row][i]) {
+				highestVal = data[row][i];
+			}
+		}
+		return highestVal;	
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles and a row index 
+	 * and returns the index of the largest element in that row. 
+	 * @param data a 2D array of doubles
+	 * @param row the row which should be searched
+	 * @return the index of the highest value in the row
+	 */
+	public static double getHighestInRowIndex(double[][] data, int row) {
+		double highestVal = 0;
+		for(int i = 0; i < data[row].length; i++) {
+			if(highestVal < data[row][i]) {
+				highestVal = i;
+			}
+		}
+		return highestVal;
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles and returns the smallest element. 
+	 * @param data a 2D array of doubles
+	 * @return the smallest value in the array
+	 */
+	public static double getLowestInArray(double[][] data) {
+		double lowestVal = data[0][0];
+		for(int i = 0; i < data.length; i++) {
+			for(int j = 0; j < data[i].length; j++) {
+				if(lowestVal > data[i][j]) {
+					lowestVal = data[i][j];
+				}
+			}
+		}
+		return lowestVal;
+	}	
+
+	/**
+	 * Passes a two-dimensional ragged array of doubles and a column index 
+	 * and returns the lowest element in that column. 
+	 * @param data a 2D array of doubles
+	 * @param col the column which should be searched
+	 * @return the lowest value in the column
+	 */
+	public static double getLowestInColumn(double[][] data, int col) {
+		double lowestVal = data[0][col];
+		for(int i = 0; i < data[0].length; i++) {
+			if(lowestVal > data[i][col] && data[i][col] != 0) {
+				lowestVal = data[i][col];
+			}
+		}
+		return lowestVal;	
+
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles and a column index 
+	 * and returns the index of the lowest element in that column. 
+	 * @param data a 2D array of doubles
+	 * @param col the column which should be searched
+	 * @return the index of the lowest value in the column
+	 */
+	public static double getLowestInColumnIndex(double[][] data, int col) {
+		double lowestVal = 0;
+		for(int i = 0; i < data.length; i++) {
+			if(lowestVal > data[i][col] && data[i][col] != 0) {
+				lowestVal = i;
+			}
+		}
+		return lowestVal;	
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles and a row index 
+	 * and returns the lowest element in that row. 
+	 * @param data a 2D array of doubles
+	 * @param row the row which should be searched
+	 * @return the lowest value in the row
+	 */
+	public static double getLowestInRow(double[][] data, int row) {
+		double lowestVal = data[row][0];
+		for(int i = 0; i < data[row].length; i++) {
+			if(lowestVal > data[row][i]) {
+				lowestVal = data[row][i];
+			}
+		}
+		return lowestVal;		
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles and a row index 
+	 * and returns the index of the lowest element in that row. 
+	 * @param data a 2D array of doubles
+	 * @param row the row which should be searched
+	 * @return the index of the lowest value in the row
+	 */
+	public static double getLowestInRowIndex(double[][] data, int row) {
+		double lowestVal = 0;
+		for(int i = 0; i < data[row].length; i++) {
+			if(lowestVal > data[row][i]) {
+				lowestVal = i;
+			}
+		}
+		return lowestVal;	
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles and a row index and returns the total of that row. 
+	 * @param data a 2D array of doubles
+	 * @param row the row which should be searched
+	 * @return the total of the doubles in that row
+	 */
+	public static double getRowTotal(double[][] data, int row) {
+		double total = 0;
+		for(int i = 0; i < data[row].length; i++) {
+			total += data[row][i];
+		}
+		return total;	
+	}
+	/**
+	 * Passes a two-dimensional ragged array of doubles returns the total. 
+	 * @param data a 2D array of doubles
+	 * @return the total of the doubles in the array 
+	 */
+	public static double getTotal(double[][] data) {
+		double total = 0;
+		for(int i = 0; i < data.length; i++) {
+			for(int j = 0; j < data[i].length; j++) {
+				total+= data[i][j];
+			}
+		}
+		return total;
+	}
+	/**
+	 * Passes in a file and return a two-dimensional ragged array of doubles
+	 * @param file the file which is to be read
+	 * @return the 2D array of doubles from the file
+	 */
+	public static double[][] readFile(File file){
+		String lineStr;
+		StringTokenizer st;
+		String token;
+		int numOfLines = 0;
+		int amountOfDoubles = 0;
+		int tempAmountOfDoubles = 0;
+		// Obtaining Array information
+		try {
+			double num;
+			Scanner fileReader = new Scanner(file);
+			while(fileReader.hasNextLine()){
+				lineStr = fileReader.nextLine();
+				st = new StringTokenizer(lineStr);
+				numOfLines++;
+				while(st.hasMoreTokens()){
+					tempAmountOfDoubles++;
+					st.nextToken();
+				}
+
+				if(tempAmountOfDoubles > amountOfDoubles) {
+					amountOfDoubles = tempAmountOfDoubles;
+				}
+				tempAmountOfDoubles = 0;
+			}
+			fileReader.close();
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println("---------------------");
+			System.err.println(ex);
+		}
+		double[][] fileDoubles = new double[numOfLines][amountOfDoubles];
+		// Filling out Array 
+		try {
+			double num;
+			Scanner fileReader = new Scanner(file);
+
+			int col = 0;  
+			int row = 0;
+			while (fileReader.hasNextLine()){
+				lineStr = fileReader.nextLine();
+				st = new StringTokenizer(lineStr);
+				col = 0;
+				while (st.hasMoreTokens()){
+					token = st.nextToken();
+					num = Double.parseDouble(token);
+					fileDoubles[row][col] = num;
+					col++;
+				}
+				row++;
+			}
+			fileReader.close();
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			System.out.println("---------------------");
+			System.err.println(ex);
+		}
+		return fileDoubles;
+	}
+
+	/**
+	 * Passes in a two-dimensional ragged array of doubles and a file;
+	 * and writes the ragged array into the file 
+	 * @param data a 2D array of doubles
+	 * @param outputFile the file which the 2D array is to be outputted to
+	 */
+	public static void writeToFile(double[][] data, File outputFile) {
+		String fileText = "";
+		for(int i = 0; i < data.length; i++) {
+			for(int j = 0; j < data[i].length; j++) {
+				fileText += data[i][j] + " ";
+			}
+			fileText += "\n";
+		}
+		outputFile = new File("dataOutput.txt");
+		if(outputFile.canWrite() == true) {
+			try {
+				FileWriter newFile = new FileWriter(outputFile);
+				newFile.append(fileText);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}

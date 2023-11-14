@@ -1,0 +1,103 @@
+/**CMSC 203 CRN 21575
+ * Program: Assignment 5
+ * Instructor:Gregory Grinberg
+ * Summary of Description: (Give a brief description for a Program): 
+ * Due Date:11/13/2023
+ * Integrity Pledge: I pledge that I have completed the programming assignment independently.
+ * I have not copied the code from a student or any source.
+ * Student: Paul Abili
+ **/
+package application;
+
+public class HolidayBonus {
+	final static double HIGHESTSALES = 5000;
+	final static double LOWESTSALES = 1000; 
+	final static double OTHERBONUSAMOUNTS = 2000;
+
+	public HolidayBonus() {
+
+	}
+	/**
+	 * Passes pass in a two-dimensional ragged array of doubles. It will return an array of doubles 
+	 * which represents the holiday bonuses for each of the stores in the district
+	 * @param data 2D array which method iterates 
+	 * @return bonus an array which contains the holiday bonus for each store
+	 */
+	public static double[] calculateHolidayBonus(double[][] data) {
+		double[] highestArray = new double[data[0].length];
+		double[] lowestArray = new double[data[0].length];
+		for(int i = 0; i < highestArray.length; i++) {
+			highestArray[i] = TwoDimRaggedArrayUtility.getHighestInColumnIndex(data, i);
+			lowestArray[i] = TwoDimRaggedArrayUtility.getLowestInColumnIndex(data, i);
+		}
+		double[] highest = new double[data.length];
+		int index = 0;
+		for(int i = 0; i < data.length; i++) {
+			index = (int)(highestArray[i]);
+			highest[index]++;
+
+		}
+
+		double[] bonusArray = new double[data.length];
+		for(int i = 0; i < bonusArray.length; i++) {
+			bonusArray[i] = 0;
+		}
+		for(int i = 0; i < data.length; i++) {
+			for(int j = 0; j < data[0].length; j++) {
+				if(j == lowestArray[j]) {
+					bonusArray[i] += LOWESTSALES; 
+				} else if(j == highestArray[j]) {
+					bonusArray[i] += HIGHESTSALES;
+				} else if(data[i][j] != 0) {
+					System.out.println(data[i][j]);
+					bonusArray[i] += OTHERBONUSAMOUNTS;
+				}
+			}
+			//bonusArray[i] += highest[i] * HIGHESTSALES;
+		}
+		return bonusArray;
+	}
+	/**
+	 * Passes pass in a two-dimensional ragged array of doubles. It will return a double 
+	 * which represents the total of all Holiday Bonuses for the District.
+	 * @param data 2D array which method iterates 
+	 * @return totalBonus a double which contains the total holiday bonus for each store
+	 */
+	public static double calculateTotalHolidayBonus(double[][] data) {
+		double[] highestArray = new double[data[0].length];
+		double[] lowestArray = new double[data[0].length];
+		for(int i = 0; i < highestArray.length; i++) {
+			highestArray[i] = TwoDimRaggedArrayUtility.getHighestInColumnIndex(data, i);
+			lowestArray[i] = TwoDimRaggedArrayUtility.getLowestInColumnIndex(data, i);
+		}
+		double[] highest = new double[data.length];
+		int index = 0;
+		for(int i = 0; i < data.length; i++) {
+			index = (int)(highestArray[i]);
+			highest[index]++;
+
+		}
+
+		double[] bonusArray = new double[data.length];
+		for(int i = 0; i < bonusArray.length; i++) {
+			bonusArray[i] = 0;
+		}
+		for(int i = 0; i < data.length; i++) {
+			for(int j = 0; j < data[0].length; j++) {
+				if(j == lowestArray[j]) {
+					bonusArray[i] += LOWESTSALES; 
+				} else if(j == highestArray[j]) {
+					bonusArray[i] += HIGHESTSALES;
+				} else if(data[i][j] != 0) {
+					System.out.println(data[i][j]);
+					bonusArray[i] += OTHERBONUSAMOUNTS;
+				}
+			}
+		}
+		double total = 0;
+		for(int i = 0; i < bonusArray.length; i++) {
+			total += bonusArray[i];
+		}
+		return total;
+	}
+}
